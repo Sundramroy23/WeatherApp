@@ -8,7 +8,7 @@ class WeatherHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:  AppBar(
+      appBar: AppBar(
         title: const Text(
           "Weather App",
           style: TextStyle(fontWeight: FontWeight.bold),
@@ -33,7 +33,7 @@ class WeatherHomePage extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               height: 200,
-              child:Card(
+              child: Card(
                 color: Colors.white10,
                 elevation: 10,
                 shape: const RoundedRectangleBorder(
@@ -51,7 +51,7 @@ class WeatherHomePage extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                           Text(
+                          Text(
                             "300.12°F",
                             style: TextStyle(
                                 fontSize: 30, fontWeight: FontWeight.bold),
@@ -89,11 +89,26 @@ class WeatherHomePage extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               child: const Row(
                 children: [
-                  WeatherForecastCard(time: "10:00",icon:  Icons.cloud,temperature:  "300.12°F"),
-                  WeatherForecastCard(time: "12:00",icon:  Icons.cloud_done,temperature:  "300.12°F"),
-                  WeatherForecastCard(time: "14:00",icon:  Icons.cloud,temperature:  "300.12°F"),
-                  WeatherForecastCard(time: "14:00",icon:  Icons.cloud,temperature:  "300.12°F"),
-                  WeatherForecastCard(time: "14:00",icon:  Icons.cloud,temperature:  "300.12°F"),
+                  WeatherForecastCard(
+                      time: "10:00",
+                      icon: Icons.cloud,
+                      temperature: "300.12°F"),
+                  WeatherForecastCard(
+                      time: "12:00",
+                      icon: Icons.cloud_done,
+                      temperature: "300.12°F"),
+                  WeatherForecastCard(
+                      time: "14:00",
+                      icon: Icons.cloud_done,
+                      temperature: "300.12°F"),
+                  WeatherForecastCard(
+                      time: "14:00",
+                      icon: Icons.sunny,
+                      temperature: "300.12°F"),
+                  WeatherForecastCard(
+                      time: "14:00",
+                      icon: Icons.sunny_snowing,
+                      temperature: "300.12°F"),
                 ],
               ),
             ),
@@ -101,9 +116,32 @@ class WeatherHomePage extends StatelessWidget {
               width: double.infinity,
               height: 20,
             ),
-            Placeholder(
-              fallbackHeight: 200,
-              fallbackWidth: 200,
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10.0),
+              child: const Text(
+                "Additional Information",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                AdditionalInformationTile(
+                  icon: Icons.sunny,
+                  title: "Humidity",
+                  subtitle: "40%",
+                ),
+                AdditionalInformationTile(
+                  icon: Icons.beach_access,
+                  title: "Pressure",
+                  subtitle: "1000",
+                ),
+                AdditionalInformationTile(
+                  icon: Icons.air,
+                  title: "Wind",
+                  subtitle: "7.1",
+                ),
+              ],
             ),
           ],
         ),
@@ -126,8 +164,8 @@ class WeatherForecastCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 115,
-      height: 115,
+      width: 120,
+      height: 120,
       child: Card(
         color: Colors.white10,
         elevation: 10,
@@ -139,7 +177,64 @@ class WeatherForecastCard extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           spacing: 5,
-          children: [Text(time), Icon(icon), Text(temperature)],
+          children: [
+            Text(
+              time,
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Icon(icon),
+            Text(temperature)
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class AdditionalInformationTile extends StatelessWidget {
+  final IconData icon;
+  final String title;
+  final String subtitle;
+  const AdditionalInformationTile(
+      {super.key,
+      required this.icon,
+      required this.title,
+      required this.subtitle}
+      );
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 120,
+      height: 120,
+      child: Card(
+        color: Colors.transparent,
+        elevation: 40,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(20),
+          ),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          spacing: 5,
+          children: [
+            Icon(
+              icon,
+              size: 40,
+            ),
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(subtitle)
+          ],
         ),
       ),
     );
